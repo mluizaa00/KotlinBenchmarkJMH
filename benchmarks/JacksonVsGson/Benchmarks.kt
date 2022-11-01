@@ -21,8 +21,8 @@ import org.openjdk.jmh.annotations.Warmup
 import java.util.concurrent.TimeUnit
 
 @Fork(1, jvmArgsAppend = ["-XX:+UseG1GC", "-XX:+AlwaysPreTouch", "-Xms2G", "-Xmx2G"])
-@Warmup(iterations = 15, time = 300, timeUnit = TimeUnit.MILLISECONDS)
-@Measurement(iterations = 15, time = 300, timeUnit = TimeUnit.MILLISECONDS)
+@Warmup(iterations = 15, time = 500, timeUnit = TimeUnit.MILLISECONDS)
+@Measurement(iterations = 15, time = 1, timeUnit = TimeUnit.SECONDS)
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Benchmark)

@@ -23,7 +23,16 @@ dependencies {
     implementation("org.openjdk.jmh:jmh-core:$jmhVersion")
     implementation("org.openjdk.jmh:jmh-generator-bytecode:$jmhVersion")
     kapt("org.openjdk.jmh:jmh-generator-annprocess:$jmhVersion")
-    implementation(fileTree("libs"))
+//    implementation(fileTree("libs"))
+
+    implementation(platform("com.fasterxml.jackson:jackson-bom:2.13.4"))
+    implementation("com.fasterxml.jackson.core:jackson-annotations")
+    implementation("com.fasterxml.jackson.core:jackson-core")
+    implementation("com.fasterxml.jackson.core:jackson-databind")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("com.google.code.gson:gson:2.10")
 }
 
 tasks.withType<JavaCompile> {
@@ -53,7 +62,7 @@ jmh {
     resultFormat.set("JSON")  // Result format type (one of CSV, JSON, NONE, SCSV, TEXT)
 
     jmh.doLast {
-        println(resultsFile.get().asFile.readText())
+        println(humanOutputFile.get().asFile.readText())
     }
 }
 

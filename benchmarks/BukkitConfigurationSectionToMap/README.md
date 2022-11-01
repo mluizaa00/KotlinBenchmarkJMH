@@ -29,7 +29,7 @@
 | memoryConfigToMapConvertionRecursive                                        | avgt | 15  | 522933.864 | ± 59566.008 | ns/op |      |
 
 
-## Java 17 (GraalVM):
+## Java 17 (GraalVM EE):
 
 ### Run 1
 
