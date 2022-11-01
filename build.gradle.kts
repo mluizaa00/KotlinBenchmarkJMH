@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.7.20"
     kotlin("kapt") version "1.7.20"
-    id("me.champeau.gradle.jmh") version "0.5.3"
+    id("me.champeau.jmh") version "0.6.8"
     id("io.morethan.jmhreport") version "0.9.0"
     application
 }
@@ -43,12 +43,28 @@ application {
     mainClass.set("com.github.secretx33.codebench.MainKt")
 }
 
-jmhReport {
-    jmhResultPath = project.file("build/result.json").absolutePath
-    jmhReportOutput = project.file("build/reports/jmh").absolutePath
+jmh {
+    val jmh = tasks.getByName("jmh")
+    jmh.finalizedBy(tasks.jmhReport)
+
+    val resultPath = file("${project.buildDir}/results/jmh")
+    humanOutputFile.set(resultPath.resolve("humanResults.txt"))
+    resultsFile.set(resultPath.resolve("results.json"))
+    resultFormat.set("JSON")  // Result format type (one of CSV, JSON, NONE, SCSV, TEXT)
+
+    jmh.doLast {
+        println(resultsFile.get().asFile.readText())
+    }
 }
 
-tasks.register<JavaExec>("benchmarks") {
-    classpath = sourceSets.getByName("test").runtimeClasspath
-    mainClass.set(application.mainClass.get())
+jmhReport {
+    val jmhResultFile = tasks.jmh.get().resultsFile.get().asFile
+    val outputFolder = jmhResultFile.parentFile.resolve("html").path
+    jmhResultPath = jmhResultFile.path
+    jmhReportOutput = outputFolder
+
+    val jmhReport = tasks.getByName("jmhReport")
+    jmhReport.doFirst {
+        file(outputFolder).mkdirs()
+    }
 }
