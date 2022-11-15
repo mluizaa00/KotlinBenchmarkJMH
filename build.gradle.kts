@@ -2,9 +2,9 @@ import org.jetbrains.kotlin.com.google.common.reflect.ClassPath
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.7.20"
-    kotlin("kapt") version "1.7.20"
-    kotlin("plugin.allopen") version "1.7.20"
+    kotlin("jvm") version "1.7.21"
+    kotlin("kapt") version "1.7.21"
+    kotlin("plugin.allopen") version "1.7.21"
     id("me.champeau.jmh") version "0.6.8"
     id("io.morethan.jmhreport") version "0.9.0"
     application
