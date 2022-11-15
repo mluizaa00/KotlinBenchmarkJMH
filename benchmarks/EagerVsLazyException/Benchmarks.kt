@@ -27,6 +27,9 @@ open class Benchmarks {
     open fun lazyException() = lazy { Exception() }.value
 
     @Benchmark
+    open fun lazyNoneException() = lazy(LazyThreadSafetyMode.NONE) { Exception() }.value
+
+    @Benchmark
     open fun uninitializedLazyException() = lazy { Exception() }
 
     @Benchmark
