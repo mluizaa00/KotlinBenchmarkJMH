@@ -1,14 +1,5 @@
 # Is it worth to wrap exceptions in lazy?
 
-## Results
-
-### Linear
-![linear table](img/linear_table.png)
-
-### Logarithm
-
-![logarithm table](img/logarithm_table.png)
-
 ## Scenario
 
 Imagine you have this code:
@@ -50,7 +41,7 @@ fun compute() {
 }
 ```
 
-While this code us certainly better to read, it is far from optimal from a performance standpoint. The instantiation of `Exception` is **very** expensive because it calls `Throwable.fillInStackTrace()`, a `protected` method that has to collect read all the [method call stack](https://www.oreilly.com/library/view/javatm-how-to/9780133813036/ch06lev2sec35.html), collecting useful data about each entry on it (like method names, parameters, line, etc).
+While this code us certainly better to read, it is far from optimal from a performance standpoint. The instantiation of `Exception` is **very** expensive because it calls `Throwable.fillInStackTrace()`, a `protected` method that has to traverse all the [method call stack](https://www.oreilly.com/library/view/javatm-how-to/9780133813036/ch06lev2sec35.html), collecting useful data about each entry on it (like method names, parameters, line, etc).
 
 Knowing about this, you changed the previous code to this:
 
@@ -73,9 +64,18 @@ fun compute() {
 }
 ```
 
+## Results
+
+### Linear
+![linear table](img/linear_table.png)
+
+### Logarithm
+
+![logarithm table](img/logarithm_table.png)
+
 ## Conclusion
 
-Most of the time I would say yes, it is 100% worth it.
+So, is it worth it? I would say most of the time **yes**, it is 100% worth it.
 
 By the numbers gathered on the benchmark, it can be extrapolated that in order for this optimization to make sense, your code should succeed (that is, not throw/fail) at least `3%`. If you can guarantee that your code succeeds is at least this much, then wrapping the exception in a `Lazy` makes sense from a performance standpoint.
 
