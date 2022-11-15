@@ -18,21 +18,21 @@ import java.util.concurrent.TimeUnit
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Benchmark)
-open class Benchmarks {
+class Benchmarks {
 
     @Benchmark
-    open fun eagerException() = Exception()
+    fun eagerException() = Exception()
 
     @Benchmark
-    open fun lazyException() = lazy { Exception() }.value
+    fun lazyException() = lazy { Exception() }.value
 
     @Benchmark
-    open fun lazyNoneException() = lazy(LazyThreadSafetyMode.NONE) { Exception() }.value
+    fun lazyNoneException() = lazy(LazyThreadSafetyMode.NONE) { Exception() }.value
 
     @Benchmark
-    open fun uninitializedLazyException() = lazy { Exception() }
+    fun uninitializedLazyException() = lazy { Exception() }
 
     @Benchmark
-    open fun emptyLazy() = lazy { }
+    fun emptyLazy() = lazy { }
 
 }

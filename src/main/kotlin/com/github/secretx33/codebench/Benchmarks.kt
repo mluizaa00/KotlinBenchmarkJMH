@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Benchmark)
-open class Benchmarks {
+class Benchmarks {
 
     // On this benchmark, the test is trying to figure out if it is worth to wrap Exception
     // instantiation with 'lazy' in scenarios where the exception is not always throw, and
@@ -38,15 +38,15 @@ open class Benchmarks {
     // Run it to see if that is worth doing on your code!
 
     @Benchmark
-    open fun eagerException() = Exception()
+    fun eagerException() = Exception()
 
     @Benchmark
-    open fun lazyException() = lazy { Exception() }.value
+    fun lazyException() = lazy { Exception() }.value
 
     @Benchmark
-    open fun uninitializedLazyException() = lazy { Exception() }
+    fun uninitializedLazyException() = lazy { Exception() }
 
     @Benchmark
-    open fun emptyLazy() = lazy { }
+    fun emptyLazy() = lazy { }
 
 }
