@@ -1,4 +1,4 @@
-# Pattern and Regex compile time
+# Pattern and Regex cache strategies
 
 ### Inspiration
 
@@ -20,7 +20,7 @@ It can be seen that caching even this small pattern brought our time from `~480n
 
 If you can give up on either of those, you can substitute the Caffeine `Cache` by a simple `Map`, which will result in another **huge** gain in performance (up to 21 times faster than using the `Cache`), taking only `~3ns`.
 
-And of course, just directly accessing the pattern cached in a class property is by far the fastest option (`< 1ns`).
+Last but not least, just directly accessing the pattern cached in a class property is by far the fastest option (`< 1ns`).
 
 ## Versions
 
