@@ -2,9 +2,11 @@
 
 ### Linear
 ![linear table](img/linear_table.png)
+_Linear scale (lower is better)._
 
 ### Logarithm
 ![logarithm table](img/log_table.png)
+_Logarithm scale (lower is better)._
 
 ## Versions
 

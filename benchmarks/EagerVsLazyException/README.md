@@ -68,10 +68,12 @@ fun compute() {
 
 ### Linear
 ![linear table](img/linear_table.png)
+_Linear scale (lower is better)._
 
 ### Logarithm
 
 ![logarithm table](img/logarithm_table.png)
+_Logarithm scale (lower is better)._
 
 ## Conclusion
 
@@ -112,6 +114,7 @@ fun compute() {
 ```
 ### Benchmark
 ![linear graph extra](img/linear_table_extra.png)
+_Linear scale (lower is better)._
 
 ### Conclusion
 
