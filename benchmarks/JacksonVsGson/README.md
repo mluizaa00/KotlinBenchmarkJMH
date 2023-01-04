@@ -1,5 +1,7 @@
 ## Java 17 (GraalVM EE)
 
+## Results
+
 ### Linear
 ![linear table](img/linear_table.png)
 _Linear scale (lower is better)._
@@ -7,14 +9,6 @@ _Linear scale (lower is better)._
 ### Logarithm
 ![logarithm table](img/log_table.png)
 _Logarithm scale (lower is better)._
-
-## Versions
-
-| Dependency | Version |
-|------------|---------|
-| Kotlin     | 1.7.20  |
-| Jackson    | 2.13.4  |
-| Gson       | 2.10    |
 
 ## Conclusion
 
@@ -29,3 +23,11 @@ Adding the standard jackson modules to `ObjectMapper` did not seem to slow it do
 ### Gson
 
 Disabling its html escape did not seem to speed it up.
+
+## Versions
+
+| Dependency | Version |
+|------------|---------|
+| Kotlin     | 1.7.20  |
+| Jackson    | 2.13.4  |
+| Gson       | 2.10    |

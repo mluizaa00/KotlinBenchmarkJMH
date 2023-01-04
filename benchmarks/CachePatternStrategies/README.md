@@ -2,7 +2,7 @@
 
 ### Inspiration
 
-I've always heard that compiling a `Pattern` is slow, and caching it is a good idea. But I always wondered if it was _always_ worth to cache it, or only in some circunstances.
+I've always heard that compiling a `Pattern` is slow, and caching it is a good idea. But I always wondered if it was _always_ worth to cache it, or only in some circumstances.
 
 For this test, I've chosen a simple (small) pattern to validate date format. This type of pattern was chosen because if it's worth to cache "even" small patterns, then it'll be worth to cache them all.
 

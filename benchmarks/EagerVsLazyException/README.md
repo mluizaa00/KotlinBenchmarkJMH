@@ -16,7 +16,7 @@ fun compute() {
         throw SomeException("message")
     }
 
-    return result;
+    return result
 }
 ```
 
@@ -37,7 +37,7 @@ fun compute() {
         throw exception
     }
 
-    return result;
+    return result
 }
 ```
 
@@ -60,7 +60,7 @@ fun compute() {
         throw exception
     }
 
-    return result;
+    return result
 }
 ```
 
