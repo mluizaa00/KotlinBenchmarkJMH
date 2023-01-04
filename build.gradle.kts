@@ -55,6 +55,19 @@ application {
     mainClass.set("com.github.secretx33.codebench.MainKt")
 }
 
+// Enables the usage of Java classes inside 'kotlin' package
+sourceSets {
+    val javaMain = "src/main/java"
+    val kotlinMain = "src/main/kotlin"
+    val allSourceMain = listOf(javaMain, kotlinMain)
+
+    main {
+        listOf(java, kotlin).forEach {
+            it.setSrcDirs(allSourceMain)
+        }
+    }
+}
+
 jmh {
     val jmh = tasks.getByName("jmh")
     jmh.finalizedBy(tasks.jmhReport)
