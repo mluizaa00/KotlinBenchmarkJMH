@@ -1,52 +1,76 @@
 package com.github.secretx33.codebench
 
-import org.openjdk.jmh.annotations.Benchmark
-import org.openjdk.jmh.annotations.BenchmarkMode
-import org.openjdk.jmh.annotations.Fork
-import org.openjdk.jmh.annotations.Measurement
-import org.openjdk.jmh.annotations.Mode
-import org.openjdk.jmh.annotations.OutputTimeUnit
-import org.openjdk.jmh.annotations.Scope
-import org.openjdk.jmh.annotations.State
-import org.openjdk.jmh.annotations.Warmup
-import org.openjdk.jmh.infra.Blackhole
+import org.openjdk.jmh.annotations.*
 import java.util.concurrent.TimeUnit
 
-/**
- * Here is where all the action happens. Annotate your methods with [@Benchmark][Benchmark] to make them appear
- * on your benchmark results.
- *
- * Remember to always either return the result of the operation or blackhole it using a [Blackhole] so the JIT
- * compiler won't remove your code and make you benchmark an empty method instead ;).
- *
- * The test can be tweaked to your likings and benchmark case, but these are good start points for anybody
- * that has just got into benchmarking and know nothing about it.
- */
-@Fork(1, jvmArgsAppend = ["-XX:+UseG1GC", "-XX:+AlwaysPreTouch", "-Xms2G", "-Xmx2G"])
-@Warmup(iterations = 15, time = 300, timeUnit = TimeUnit.MILLISECONDS)
-@Measurement(iterations = 15, time = 300, timeUnit = TimeUnit.MILLISECONDS)
+@Fork(1, jvmArgsAppend = ["-XX:+UseG1GC", "-XX:+AlwaysPreTouch", "-Xms4G", "-Xmx4G"])
+@Warmup(iterations = 10, time = 300, timeUnit = TimeUnit.MILLISECONDS)
+@Measurement(iterations = 10, time = 300, timeUnit = TimeUnit.MILLISECONDS)
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Benchmark)
 class Benchmarks {
 
-    // On this benchmark, the test is trying to figure out if it is worth to wrap Exception
-    // instantiation with 'lazy' in scenarios where the exception is not always throw, and
-    // also see if there is any difference in speed for creating an uninitialized empty 'lazy'
-    // vs an uninitialized 'lazy' of an exception.
-    //
-    // Run it to see if that is worth doing on your code!
+    private val randomSeed = RandomSeed()
 
+    @Threads(1)
     @Benchmark
-    fun eagerException() = Exception()
+    fun testSnowflakePerformance1(): Int = randomSeed.generateId()
 
+    @Threads(4)
     @Benchmark
-    fun lazyException() = lazy { Exception() }.value
+    fun testSnowflakePerformance4(): Int = randomSeed.generateId()
 
+    @Threads(8)
     @Benchmark
-    fun uninitializedLazyException() = lazy { Exception() }
+    fun testSnowflakePerformance8(): Int = randomSeed.generateId()
 
+    @Threads(12)
     @Benchmark
-    fun emptyLazy() = lazy { }
+    fun testSnowflakePerformance12(): Int = randomSeed.generateId()
+
+    @Threads(16)
+    @Benchmark
+    fun testSnowflakePerformance16(): Int = randomSeed.generateId()
+
+    @Threads(20)
+    @Benchmark
+    fun testSnowflakePerformance20(): Int = randomSeed.generateId()
+
+    @Threads(30)
+    @Benchmark
+    fun testSnowflakePerformance30(): Int = randomSeed.generateId()
+
+    @Threads(50)
+    @Benchmark
+    fun testSnowflakePerformance50(): Int = randomSeed.generateId()
+
+    @Threads(70)
+    @Benchmark
+    fun testSnowflakePerformance70(): Int = randomSeed.generateId()
+
+    @Threads(100)
+    @Benchmark
+    fun testSnowflakePerformance100(): Int = randomSeed.generateId()
+
+//    @Threads(120)
+//    @Benchmark
+//    fun testSnowflakePerformance120(): Int = randomSeed.generateId()
+//
+//    @Threads(180)
+//    @Benchmark
+//    fun testSnowflakePerformance180(): Int = randomSeed.generateId()
+//
+//    @Threads(240)
+//    @Benchmark
+//    fun testSnowflakePerformance240(): Int = randomSeed.generateId()
+
+//    @Threads(300)
+//    @Benchmark
+//    fun testSnowflakePerformance300(): Int = randomSeed.generateId()
+//
+//    @Threads(500)
+//    @Benchmark
+//    fun testSnowflakePerformance500(): Int = randomSeed.generateId()
 
 }
